@@ -9,7 +9,7 @@
     
     <dialog id="dialog">
 
-        <form method="dialog">
+        <form method="dialog" id="get_avatar_image_form">
 
             <div class="card">
                 <section class="card--head">
@@ -36,7 +36,7 @@
                 <section class="card--body">
                     <div class="card--body--file">
                         <label for="userimage">Upload an image</label>
-                        <input id="userimage" type="file" name="userimage">
+                        <input id="userimage" type="file" accept=".jpg, .jpeg, .png" name="userimage">
                     </div>
                     <p class="card--body--max_upload">* Maximum upload 1mb</p>
                 </section>
@@ -44,7 +44,7 @@
                     <button class="card--footer-clear_btn">Clear</button>
                     <div class="card--footer-menu">
                         <button class="card--footer-cancel_btn">Cancel</button>
-                        <button id="confirmBtn" class="card--footer-cancel_confirm">Confirm</button>
+                        <button type="submit" id="confirmBtn" class="card--footer-cancel_confirm">Confirm</button>
                     </div>
                 </section>
             </div>
@@ -53,19 +53,16 @@
 
     </dialog>
 
-    <dialog>
-
-    </dialog>
     
 
-    <button class="avatar-img-btn">
+    <!-- <button class="avatar-img-btn">
         <ion-icon class="close-avatar-icon" name="close-outline"></ion-icon>
         <img src="avatar-5 (1).png" alt="" class="avatar-img">
     </button>
     <button class="avatar-img-btn">
         <ion-icon class="close-avatar-icon" name="close-outline"></ion-icon>
         <img src="avatar-5.png" alt="" class="avatar-img">
-    </button>
+    </button> -->
     <button id="add_new_avatar" type="button" class="avatar-button avatar-button__add-new">+</button>
 
     <output></output>
