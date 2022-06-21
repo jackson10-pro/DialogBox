@@ -13,36 +13,46 @@ avatarBtn.addEventListener('click', function onOpen() {
 
 
 const avatarFormElement = document.querySelector("#get_avatar_image_form");
-
-function formSubmitted(event){
+let images = [];
+function formSubmitted(event) {
     const fileInput = avatarFormElement.querySelector("input[name=userimage]");
     const files = fileInput.files;
-    if(files.length == 0 ) {
+    if (files.length == 0) {
         console.log("No file submitted");
         return;
     }
     const image = files[0];
-   const imageUrl = URL.createObjectURL(image);
-   addImageToTheDOM(imageUrl);
+    const imageUrl = URL.createObjectURL(image);
+
+    addImageToTheDOM(imageUrl);
 
 }
-function addImageToTheDOM(imageURL){
-    const button = document.createElement("button");
-    button.classList.add("avatar-img-btn");
-    const closeIcon = document.createElement("ion-icon");
-    closeIcon.classList.add("close-avatar-icon");
-    closeIcon.name = "close-outline";
-
-    button.appendChild(closeIcon);
-    
-    const imageElt = document.createElement("img");
-    imageElt.src = imageURL;
-    imageElt.classList.add("avatar-img");
-
-    button.appendChild(imageElt);
-    const addAvatarButton = document.querySelector("#add_new_avatar");
-    document.body.insertBefore(button, addAvatarButton);
+function addImageToTheDOM(imageUrl) {
+    let container = document.getElementById('container');
+    const check = images.filter(item => item.url == imageUrl);
+    if (!check.length > 0) {
+        
+        let ide = Date.now();
+        images.push({ url: imageUrl, id: ide });
+        container.innerHTML += `<button class="avatar-img-btn" onClick="removeItem(${ide})">
+        <ion-icon class="close-avatar-icon" name="close-outline"></ion-icon>
+        <img src=${imageUrl} alt="" class="avatar-img">
+         </button>`;
+    }
+    else{
+           return "";
+    }
 
 }
-
+function removeItem(id) {
+    images = images.filter(item => item.id != id);
+    let container = document.getElementById('container');
+    container.innerHTML = "";
+    images.map((item) => {
+        container.innerHTML = `<button class="avatar-img-btn" onClick="removeItem(${item.id})">
+        <ion-icon class="close-avatar-icon" name="close-outline"></ion-icon>
+        <img src=${item.url} alt="" class="avatar-img">
+         </button>`
+    })
+}
 avatarFormElement.addEventListener("submit", formSubmitted);
